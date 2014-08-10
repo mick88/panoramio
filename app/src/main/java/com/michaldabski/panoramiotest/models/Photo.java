@@ -1,11 +1,14 @@
 package com.michaldabski.panoramiotest.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Michal on 08/08/2014.
  */
-public class Photo
+public class Photo implements Parcelable
 {
     int height;
     int width;
@@ -118,4 +121,58 @@ public class Photo
                 ", uploadDate='" + uploadDate + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i)
+    {
+        parcel.writeInt(height);
+        parcel.writeInt(width);
+        parcel.writeFloat(latitude);
+        parcel.writeFloat(longitude);
+        parcel.writeInt(ownerId);
+        parcel.writeString(ownerName);
+        parcel.writeString(ownerUrl);
+        parcel.writeString(url);
+        parcel.writeInt(photoId);
+        parcel.writeString(photoTitle);
+        parcel.writeString(uploadDate);
+    }
+
+    public void populateFromParcel(Parcel parcel)
+    {
+        height = parcel.readInt();
+        width = parcel.readInt();
+        latitude = parcel.readFloat();
+        longitude = parcel.readFloat();
+        ownerId = parcel.readInt();
+        ownerName = parcel.readString();
+        ownerUrl = parcel.readString();
+        url = parcel.readString();
+        photoId = parcel.readInt();
+        photoTitle = parcel.readString();
+        uploadDate = parcel.readString();
+    }
+
+    public static final Creator<Photo> CREATOR = new Creator<Photo>()
+    {
+        @Override
+        public Photo createFromParcel(Parcel parcel)
+        {
+            Photo photo = new Photo();
+            photo.populateFromParcel(parcel);
+            return photo;
+        }
+
+        @Override
+        public Photo[] newArray(int i)
+        {
+            return new Photo[i];
+        }
+    };
 }

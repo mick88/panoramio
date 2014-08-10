@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
     private final Random random = new Random(System.currentTimeMillis());
 
     PanoramioResponse panoramioResponse;
-    String currentImage;
+    Photo currentPhoto;
 
     RequestQueue requestQueue;
     ImageLoader imageLoader;
@@ -59,8 +59,8 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
         imageView.setOnClickListener(this);
         if (savedInstanceState != null)
         {
-            currentImage = savedInstanceState.getString(STATE_CURRENT_IMAGE);
-            imageView.setImageUrl(currentImage, imageLoader);
+            currentPhoto = savedInstanceState.getParcelable(STATE_CURRENT_IMAGE);
+            setPhoto(currentPhoto);
         }
     }
 
@@ -145,7 +145,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
     {
         Log.d("Response", response.toString());
         this.panoramioResponse = response;
-        if (currentImage == null)
+        if (currentPhoto == null)
             setRandomPhoto();
     }
 
@@ -153,8 +153,8 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
     protected void onSaveInstanceState(Bundle outState)
     {
         super.onSaveInstanceState(outState);
-        if (currentImage != null)
-            outState.putString(STATE_CURRENT_IMAGE, currentImage);
+        if (currentPhoto != null)
+            outState.putParcelable(STATE_CURRENT_IMAGE, currentPhoto);
     }
 
     void setRandomPhoto()
@@ -166,16 +166,15 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
             {
                 int pos = random.nextInt(photos.size());
                 setPhoto(photos.get(pos));
-                currentImage = photos.get(pos).getUrl();
             }
         }
     }
 
     void setPhoto(Photo photo)
     {
-        this.currentImage = photo.getUrl();
+        this.currentPhoto = photo;
         NetworkImageView imageView = (NetworkImageView) findViewById(R.id.imgImage);
-        imageView.setImageUrl(currentImage, imageLoader);
+        imageView.setImageUrl(currentPhoto.getUrl(), imageLoader);
 
         TextView tvAuthor = (TextView) findViewById(R.id.tvAuthor);
         tvAuthor.setText(photo.getOwnerName());
