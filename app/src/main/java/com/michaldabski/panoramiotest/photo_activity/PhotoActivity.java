@@ -53,11 +53,13 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
             panoramioResponse = savedInstanceState.getParcelable(STATE_RESPONSE);
         }
 
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setPageTransformer(false, new PhotoPageTransformer());
+
         if (panoramioResponse == null)
             acquireLocation();
         else
         {
-            ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
             viewPager.setAdapter(new PhotoPagerAdapter(getFragmentManager(), panoramioResponse.getPhotos()));
         }
     }
