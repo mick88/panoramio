@@ -21,12 +21,8 @@ import com.michaldabski.panoramiotest.requests.NearbyPhotosRequest;
 import com.michaldabski.panoramiotest.requests.PanoramioRequest;
 import com.michaldabski.panoramiotest.utils.VolleySingleton;
 
-import java.util.Random;
-
 public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener
 {
-    static final int NUM_PHOTOS = 50;
-    private final Random random = new Random(System.currentTimeMillis());
     private static final String STATE_RESPONSE = "response";
 
     PanoramioResponse panoramioResponse;
@@ -100,8 +96,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 
     void requestPhotos(float lat, float lng)
     {
-        int from = random.nextInt(1000);
-        requestPhotos(lat, lng, from, from+NUM_PHOTOS);
+        requestPhotos(lat, lng, 0, 100);
     }
 
     void requestPhotos(float lat, float lng, int from, int to)
