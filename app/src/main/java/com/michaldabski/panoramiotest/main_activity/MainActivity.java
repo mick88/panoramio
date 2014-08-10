@@ -2,23 +2,28 @@ package com.michaldabski.panoramiotest.main_activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.PanoramioResponse;
+import com.michaldabski.panoramiotest.models.Photo;
+import com.michaldabski.panoramiotest.photo_activity.PhotoActivity;
 import com.michaldabski.panoramiotest.requests.NearbyPhotosRequest;
 import com.michaldabski.panoramiotest.requests.PanoramioRequest;
 import com.michaldabski.panoramiotest.utils.VolleySingleton;
 
 import java.util.Random;
 
-public class MainActivity extends Activity implements Response.ErrorListener
+public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener
 {
     static final int NUM_PHOTOS = 50;
     private final Random random = new Random(System.currentTimeMillis());
@@ -37,13 +42,12 @@ public class MainActivity extends Activity implements Response.ErrorListener
             panoramioResponse = savedInstanceState.getParcelable(STATE_RESPONSE);
         }
 
+        GridView gridView = (GridView) findViewById(R.id.gridView);
+        gridView.setOnItemClickListener(this);
         if (panoramioResponse == null)
             acquireLocation();
         else
-        {
-            GridView gridView = (GridView) findViewById(R.id.gridView);
             gridView.setAdapter(new PhotoGridAdapter(this, panoramioResponse.getPhotos()));
-        }
     }
 
     void onPanoramioResponse(PanoramioResponse response)
@@ -126,4 +130,13 @@ public class MainActivity extends Activity implements Response.ErrorListener
                 .show();
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+    {
+        Intent intent = new Intent(this, PhotoActivity.class);
+        intent.putExtra(PhotoActivity.ARG_PHOTOS_ARRAY, panoramioResponse.getPhotos().toArray(new Photo[panoramioResponse.getPhotos().size()]));
+        intent.putExtra(PhotoActivity.ARG_SELECTED_INDEX, position);
+
+        startActivity(intent);
+    }
 }
