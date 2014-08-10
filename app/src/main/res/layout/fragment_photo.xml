@@ -17,5 +17,6 @@
         android:id="@+id/tvAuthor"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        style="@style/AppTheme.textViewStyle"
         android:layout_alignParentEnd="true"/>
 </RelativeLayout>
