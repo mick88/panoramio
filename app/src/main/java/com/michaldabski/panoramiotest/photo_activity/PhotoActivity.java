@@ -23,6 +23,7 @@ import java.util.Random;
 
 public class PhotoActivity extends Activity implements Response.ErrorListener
 {
+    private static final String STATE_RESPONSE = "response";
     static final int NUM_PHOTOS = 50;
     private final Random random = new Random(System.currentTimeMillis());
 
@@ -47,7 +48,25 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
         imageCache = new LruImageCache();
         imageLoader = new ImageLoader(requestQueue, imageCache);
 
-        acquireLocation();
+        if (savedInstanceState != null)
+        {
+            panoramioResponse = savedInstanceState.getParcelable(STATE_RESPONSE);
+        }
+
+        if (panoramioResponse == null)
+            acquireLocation();
+        else
+        {
+            ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+            viewPager.setAdapter(new PhotoPagerAdapter(getFragmentManager(), panoramioResponse.getPhotos()));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(STATE_RESPONSE, panoramioResponse);
     }
 
     void acquireLocation()

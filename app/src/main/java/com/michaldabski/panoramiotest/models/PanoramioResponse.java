@@ -1,20 +1,24 @@
 package com.michaldabski.panoramiotest.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Michal on 08/08/2014.
  */
-public class PanoramioResponse
+public class PanoramioResponse implements Parcelable
 {
     int count;
     @SerializedName("has_more")
     boolean hasMore;
     @SerializedName("map_location")
     MapLocation mapLocation;
-    List<Photo> photos;
+    ArrayList<Photo> photos;
 
     public List<Photo> getPhotos()
     {
@@ -46,4 +50,44 @@ public class PanoramioResponse
                 ", photos=" + photos +
                 '}';
     }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags)
+    {
+        parcel.writeInt(count);
+        parcel.writeByte((byte) (hasMore ? 1 : 0));
+        parcel.writeParcelable(mapLocation, flags);
+        parcel.writeList(photos);
+    }
+
+    protected void populateFromParcel(Parcel parcel)
+    {
+        count = parcel.readInt();
+        hasMore = parcel.readByte() == 1;
+        mapLocation = parcel.readParcelable(MapLocation.class.getClassLoader());
+        photos = parcel.readArrayList(Photo.class.getClassLoader());
+    }
+
+    public static final Creator<PanoramioResponse> CREATOR = new Creator<PanoramioResponse>()
+    {
+        @Override
+        public PanoramioResponse createFromParcel(Parcel parcel)
+        {
+            PanoramioResponse response = new PanoramioResponse();
+            response.populateFromParcel(parcel);
+            return response;
+        }
+
+        @Override
+        public PanoramioResponse[] newArray(int i)
+        {
+            return new PanoramioResponse[i];
+        }
+    };
 }
