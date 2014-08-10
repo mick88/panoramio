@@ -4,6 +4,7 @@ import android.app.Application;
 import android.test.ApplicationTestCase;
 
 import com.michaldabski.panoramiotest.models.Photo;
+import com.michaldabski.panoramiotest.utils.PhotoDistanceComparator;
 
 import junit.framework.Assert;
 

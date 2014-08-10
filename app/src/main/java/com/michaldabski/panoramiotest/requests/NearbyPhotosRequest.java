@@ -2,7 +2,7 @@ package com.michaldabski.panoramiotest.requests;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
-import com.michaldabski.panoramiotest.PhotoDistanceComparator;
+import com.michaldabski.panoramiotest.utils.PhotoDistanceComparator;
 import com.michaldabski.panoramiotest.models.PanoramioResponse;
 
 import java.util.Collections;

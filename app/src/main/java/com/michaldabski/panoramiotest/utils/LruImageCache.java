@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest;
+package com.michaldabski.panoramiotest.utils;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;

@@ -14,7 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.michaldabski.panoramiotest.LruImageCache;
+import com.michaldabski.panoramiotest.utils.LruImageCache;
 import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.PanoramioResponse;
 import com.michaldabski.panoramiotest.requests.NearbyPhotosRequest;
