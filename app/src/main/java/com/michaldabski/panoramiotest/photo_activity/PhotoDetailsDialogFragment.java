@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 
+import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.Photo;
 
 import java.util.Locale;
@@ -22,7 +23,7 @@ public class PhotoDetailsDialogFragment extends DialogFragment
     {
         Photo photo = getArguments().getParcelable(ARG_PHOTO);
         return new AlertDialog.Builder(getActivity())
-                .setTitle("Photo details")
+                .setTitle(R.string.photo_details)
                 .setMessage(getPhotoDetails(photo))
                 .setPositiveButton(android.R.string.ok, null)
                 .create();
