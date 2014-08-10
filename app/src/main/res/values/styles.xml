@@ -1,8 +1,15 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.NoActionBar">
+    <style name="AppTheme" parent="android:Theme.Holo">
         <item name="android:textViewStyle">@style/AppTheme.textViewStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/actionbar</item>
+    </style>
+
+    <style name="actionbar" parent="android:Widget.Holo.ActionBar.Solid">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:displayOptions">showHome</item>
     </style>
 
     <style name="AppTheme.textViewStyle">
