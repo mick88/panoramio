@@ -137,10 +137,4 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
         viewPager.setAdapter(new PhotoPagerAdapter(getFragmentManager(), response.getPhotos()));
     }
 
-    @Override
-    public void onLowMemory()
-    {
-        super.onLowMemory();
-        VolleySingleton.getInstance(this).getImageCache().clear();
-    }
 }
