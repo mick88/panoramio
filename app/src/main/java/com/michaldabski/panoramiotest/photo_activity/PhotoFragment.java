@@ -1,8 +1,13 @@
 package com.michaldabski.panoramiotest.photo_activity;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -10,6 +15,8 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.Photo;
+
+import java.util.Locale;
 
 /**
  * Created by Michal on 10/08/2014.
@@ -24,7 +31,33 @@ public class PhotoFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        setHasOptionsMenu(true);
         photo = getArguments().getParcelable(ARG_PHOTO);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.photo, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.actionLocation:
+                final String uri = String.format(Locale.ENGLISH, "geo:0,0?q=%f,%f(%s)",
+                        photo.getLatitude(), photo.getLongitude(), photo.getPhotoTitle());
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(uri));
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
