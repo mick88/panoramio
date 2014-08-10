@@ -29,6 +29,25 @@ public class Photo implements Parcelable
     @SerializedName("upload_date")
     String uploadDate;
 
+    public Photo()
+    {
+    }
+
+    public Photo(int height, int width, float latitude, float longitude, int ownerId, String ownerName, String ownerUrl, String url, int photoId, String photoTitle, String uploadDate)
+    {
+        this.height = height;
+        this.width = width;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.ownerId = ownerId;
+        this.ownerName = ownerName;
+        this.ownerUrl = ownerUrl;
+        this.url = url;
+        this.photoId = photoId;
+        this.photoTitle = photoTitle;
+        this.uploadDate = uploadDate;
+    }
+
     public String getUrl()
     {
         return url;

@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.michaldabski.panoramiotest.LruImageCache;
 import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.PanoramioResponse;
+import com.michaldabski.panoramiotest.requests.NearbyPhotosRequest;
 import com.michaldabski.panoramiotest.requests.PanoramioRequest;
 
 import java.util.Random;
@@ -32,11 +33,6 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
     RequestQueue requestQueue;
     ImageLoader imageLoader;
     LruImageCache imageCache;
-
-    float minx = -180,
-            miny = -90,
-            maxx = 180,
-            maxy = 90;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -79,14 +75,7 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
             @Override
             public void onLocationChanged(Location location)
             {
-                minx = (float) (location.getLongitude() - 1f);
-                miny = (float) (location.getLatitude() -1f);
-                maxx = (float) (location.getLongitude() + 1f);
-                maxy = (float) (location.getLatitude() + 1f);
-
-                Log.d("Location", location.toString());
-                Log.d("Location", String.format("%f %f %f %f", miny, minx, maxy, maxx));
-                requestPhotos();
+                requestPhotos((float)location.getLatitude(), (float)location.getLongitude());
                 locationManager.removeUpdates(this);
             }
 
@@ -112,15 +101,15 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
     }
 
-    void requestPhotos()
+    void requestPhotos(float lat, float lng)
     {
         int from = random.nextInt(1000);
-        requestPhotos(from, from+NUM_PHOTOS);
+        requestPhotos(lat, lng, from, from+NUM_PHOTOS);
     }
 
-    void requestPhotos(int from, int to)
+    void requestPhotos(float lat, float lng, int from, int to)
     {
-        PanoramioRequest panoramioRequest = new PanoramioRequest(this, minx, miny, maxx, maxy, from, to)
+        PanoramioRequest panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from, to)
         {
             @Override
             protected void deliverResponse(PanoramioResponse response)
