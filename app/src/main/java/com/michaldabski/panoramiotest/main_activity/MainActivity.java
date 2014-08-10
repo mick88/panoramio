@@ -21,9 +21,14 @@ import com.michaldabski.panoramiotest.requests.NearbyPhotosRequest;
 import com.michaldabski.panoramiotest.requests.PanoramioRequest;
 import com.michaldabski.panoramiotest.utils.VolleySingleton;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener
 {
     private static final String STATE_RESPONSE = "response";
+    private List<Photo> photos = new ArrayList<Photo>();
 
     PanoramioResponse panoramioResponse;
 
@@ -40,17 +45,29 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 
         GridView gridView = (GridView) findViewById(R.id.gridView);
         gridView.setOnItemClickListener(this);
+        gridView.setAdapter(new PhotoGridAdapter(this, photos));
+
         if (panoramioResponse == null)
             acquireLocation();
         else
-            gridView.setAdapter(new PhotoGridAdapter(this, panoramioResponse.getPhotos()));
+        {
+            addPhotos(panoramioResponse.getPhotos());
+        }
+
+    }
+
+    void addPhotos(Collection<Photo> photoCollection)
+    {
+        photos.addAll(photoCollection);
+        GridView gridView = (GridView) findViewById(R.id.gridView);
+        PhotoGridAdapter adapter = (PhotoGridAdapter) gridView.getAdapter();
+        adapter.notifyDataSetChanged();
     }
 
     void onPanoramioResponse(PanoramioResponse response)
     {
         this.panoramioResponse = response;
-        GridView gridView = (GridView) findViewById(R.id.gridView);
-        gridView.setAdapter(new PhotoGridAdapter(this, panoramioResponse.getPhotos()));
+        addPhotos(panoramioResponse.getPhotos());
     }
 
     @Override
