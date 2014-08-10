@@ -9,16 +9,13 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
-import com.michaldabski.panoramiotest.utils.LruImageCache;
 import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.PanoramioResponse;
 import com.michaldabski.panoramiotest.requests.NearbyPhotosRequest;
 import com.michaldabski.panoramiotest.requests.PanoramioRequest;
+import com.michaldabski.panoramiotest.utils.VolleySingleton;
 
 import java.util.Random;
 
@@ -30,19 +27,11 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
 
     PanoramioResponse panoramioResponse;
 
-    RequestQueue requestQueue;
-    ImageLoader imageLoader;
-    LruImageCache imageCache;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
-
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-        imageCache = new LruImageCache();
-        imageLoader = new ImageLoader(requestQueue, imageCache);
 
         if (savedInstanceState != null)
         {
@@ -118,19 +107,15 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
                 onPanoramioResponse(response);
             }
         };
-        requestQueue.add(panoramioRequest);
+        panoramioRequest.setTag(this);
+        VolleySingleton.getInstance(this).getRequestQueue().add(panoramioRequest);
     }
 
     @Override
     protected void onDestroy()
     {
+        VolleySingleton.getInstance(this).getRequestQueue().cancelAll(this);
         super.onDestroy();
-        requestQueue.stop();
-    }
-
-    public ImageLoader getImageLoader()
-    {
-        return imageLoader;
     }
 
     @Override
@@ -156,6 +141,6 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
     public void onLowMemory()
     {
         super.onLowMemory();
-        imageCache.clear();
+        VolleySingleton.getInstance(this).getImageCache().clear();
     }
 }

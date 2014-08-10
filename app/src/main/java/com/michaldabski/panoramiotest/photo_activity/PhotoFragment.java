@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.Photo;
+import com.michaldabski.panoramiotest.utils.VolleySingleton;
 
 import java.util.Locale;
 
@@ -78,7 +79,7 @@ public class PhotoFragment extends Fragment
 
         PhotoActivity activity = (PhotoActivity) getActivity();
         NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.imgImage);
-        imageView.setImageUrl(photo.getUrl(), activity.getImageLoader());
+        imageView.setImageUrl(photo.getUrl(), VolleySingleton.getInstance(getActivity()).getImageLoader());
 
         TextView tvAuthor = (TextView) view.findViewById(R.id.tvAuthor);
         tvAuthor.setText(photo.getOwnerName());
