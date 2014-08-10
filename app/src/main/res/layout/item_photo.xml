@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.android.volley.toolbox.NetworkImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:scaleType="centerCrop"
+    android:layout_width="@dimen/thumb_size"
+    android:layout_height="@dimen/thumb_size"/>
