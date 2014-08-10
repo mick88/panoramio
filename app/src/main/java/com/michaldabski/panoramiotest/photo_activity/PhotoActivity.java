@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest;
+package com.michaldabski.panoramiotest.photo_activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,31 +6,27 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.michaldabski.panoramiotest.LruImageCache;
+import com.michaldabski.panoramiotest.R;
 import com.michaldabski.panoramiotest.models.PanoramioResponse;
-import com.michaldabski.panoramiotest.models.Photo;
 import com.michaldabski.panoramiotest.requests.PanoramioRequest;
 
-import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends Activity implements Response.ErrorListener, View.OnClickListener
+public class PhotoActivity extends Activity implements Response.ErrorListener
 {
-    private static final String STATE_CURRENT_IMAGE = "current_image";
     static final int NUM_PHOTOS = 50;
     private final Random random = new Random(System.currentTimeMillis());
 
     PanoramioResponse panoramioResponse;
-    Photo currentPhoto;
 
     RequestQueue requestQueue;
     ImageLoader imageLoader;
@@ -52,21 +48,11 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
         imageLoader = new ImageLoader(requestQueue, imageCache);
 
         acquireLocation();
-
-        requestPhotos();
-
-        NetworkImageView imageView = (NetworkImageView) findViewById(R.id.imgImage);
-        imageView.setOnClickListener(this);
-        if (savedInstanceState != null)
-        {
-            currentPhoto = savedInstanceState.getParcelable(STATE_CURRENT_IMAGE);
-            setPhoto(currentPhoto);
-        }
     }
 
     void acquireLocation()
     {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener()
         {
             @Override
@@ -80,6 +66,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
                 Log.d("Location", location.toString());
                 Log.d("Location", String.format("%f %f %f %f", miny, minx, maxy, maxx));
                 requestPhotos();
+                locationManager.removeUpdates(this);
             }
 
             @Override
@@ -130,6 +117,11 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
         requestQueue.stop();
     }
 
+    public ImageLoader getImageLoader()
+    {
+        return imageLoader;
+    }
+
     @Override
     public void onErrorResponse(VolleyError error)
     {
@@ -145,41 +137,8 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
     {
         Log.d("Response", response.toString());
         this.panoramioResponse = response;
-        if (currentPhoto == null)
-            setRandomPhoto();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState)
-    {
-        super.onSaveInstanceState(outState);
-        if (currentPhoto != null)
-            outState.putParcelable(STATE_CURRENT_IMAGE, currentPhoto);
-    }
-
-    void setRandomPhoto()
-    {
-        if (panoramioResponse != null)
-        {
-            List<Photo> photos = panoramioResponse.getPhotos();
-            if (photos.isEmpty() == false)
-            {
-                int pos = random.nextInt(photos.size());
-                setPhoto(photos.get(pos));
-            }
-        }
-    }
-
-    void setPhoto(Photo photo)
-    {
-        this.currentPhoto = photo;
-        NetworkImageView imageView = (NetworkImageView) findViewById(R.id.imgImage);
-        imageView.setImageUrl(currentPhoto.getUrl(), imageLoader);
-
-        TextView tvAuthor = (TextView) findViewById(R.id.tvAuthor);
-        tvAuthor.setText(photo.getOwnerName());
-
-        Log.d("Photo set", photo.toString());
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setAdapter(new PhotoPagerAdapter(getFragmentManager(), response.getPhotos()));
     }
 
     @Override
@@ -187,16 +146,5 @@ public class MainActivity extends Activity implements Response.ErrorListener, Vi
     {
         super.onLowMemory();
         imageCache.clear();
-    }
-
-    @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.imgImage:
-                setRandomPhoto();
-                break;
-        }
     }
 }
