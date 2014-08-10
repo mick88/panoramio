@@ -109,6 +109,7 @@ public class PhotoActivity extends Activity implements Response.ErrorListener
             }
         };
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
     }
 
     void requestPhotos()
