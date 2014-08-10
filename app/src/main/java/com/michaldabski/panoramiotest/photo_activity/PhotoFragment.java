@@ -56,6 +56,11 @@ public class PhotoFragment extends Fragment
                     startActivity(intent);
                 }
                 break;
+
+            case R.id.actionDetails:
+                PhotoDetailsDialogFragment.newInstance(photo)
+                        .show(getFragmentManager(), PhotoDetailsDialogFragment.TAG);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
