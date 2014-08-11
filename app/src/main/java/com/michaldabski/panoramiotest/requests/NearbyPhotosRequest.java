@@ -12,6 +12,7 @@ import java.util.Collections;
  */
 public class NearbyPhotosRequest extends PanoramioRequest
 {
+    public static final int NUM_PHOTOS = 30;
     private final float userLat, userLong;
 
     public NearbyPhotosRequest(Response.ErrorListener listener, float latitude, float longitude, int from, int to)
@@ -19,6 +20,11 @@ public class NearbyPhotosRequest extends PanoramioRequest
         super(listener, longitude-1f, latitude-1f, longitude+1f, latitude+1f, from, to);
         userLat = latitude;
         userLong = longitude;
+    }
+
+    public NearbyPhotosRequest(Response.ErrorListener listener, float latitude, float longitude, int from)
+    {
+        this(listener, latitude, longitude, from, from+NUM_PHOTOS);
     }
 
     @Override

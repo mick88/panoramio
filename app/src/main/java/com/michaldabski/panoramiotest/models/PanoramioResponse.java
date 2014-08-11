@@ -40,6 +40,11 @@ public class PanoramioResponse implements Parcelable
         return mapLocation;
     }
 
+    public void setPhotos(ArrayList<Photo> photos)
+    {
+        this.photos = photos;
+    }
+
     @Override
     public String toString()
     {
