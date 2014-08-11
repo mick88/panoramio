@@ -24,7 +24,6 @@ import com.michaldabski.panoramiotest.utils.VolleySingleton;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener
 {
@@ -32,7 +31,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             STATE_RESPONSE = "response",
             STATE_LAT = "latitude",
             STATE_LONG = "longitude";
-    private List<Photo> photos = new ArrayList<Photo>();
+    private ArrayList<Photo> photos = new ArrayList<Photo>();
 
     PanoramioResponse panoramioResponse;
     PanoramioRequest panoramioRequest = null;
@@ -63,6 +62,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         else
         {
             addPhotos(panoramioResponse.getPhotos());
+            panoramioResponse.setPhotos(this.photos);
         }
 
     }
@@ -79,6 +79,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     {
         this.panoramioResponse = response;
         addPhotos(panoramioResponse.getPhotos());
+        panoramioResponse.setPhotos(this.photos);
     }
 
     @Override
