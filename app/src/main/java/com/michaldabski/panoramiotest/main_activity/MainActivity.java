@@ -190,7 +190,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     @Override
     public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount)
     {
-        if (totalItemCount <= firstVisibleItem+visibleItemCount && !isRequestPending() && Float.isNaN(latitude) == false && totalItemCount < panoramioResponse.getCount())
+        if (firstVisibleItem != 0 && totalItemCount <= firstVisibleItem+visibleItemCount && !isRequestPending() && Float.isNaN(latitude) == false && totalItemCount < panoramioResponse.getCount())
         {
             requestPhotos(latitude, longitude, photos.size());
         }
