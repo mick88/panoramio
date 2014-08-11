@@ -30,7 +30,7 @@ public class PhotoActivity extends Activity
             photos.add((Photo) parcelable);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setPageTransformer(false, new PhotoPageTransformer());
+        viewPager.setPageTransformer(true, new PhotoPageTransformer());
         viewPager.setAdapter(new PhotoPagerAdapter(getFragmentManager(), photos));
         // if activity just launched, show photo selected by user
         if (savedInstanceState == null)
