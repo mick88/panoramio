@@ -1,11 +1,6 @@
 package com.michaldabski.panoramiotest.requests;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
-import com.michaldabski.panoramiotest.utils.PhotoDistanceComparator;
-import com.michaldabski.panoramiotest.models.PanoramioResponse;
-
-import java.util.Collections;
 
 /**
  * Created by Michal on 10/08/2014.
@@ -27,14 +22,4 @@ public class NearbyPhotosRequest extends PanoramioRequest
         this(listener, latitude, longitude, from, from+NUM_PHOTOS);
     }
 
-    @Override
-    protected Response<PanoramioResponse> parseNetworkResponse(NetworkResponse networkResponse)
-    {
-        Response<PanoramioResponse> response = super.parseNetworkResponse(networkResponse);
-        if (response.isSuccess())
-        {
-            Collections.sort(response.result.getPhotos(), new PhotoDistanceComparator(userLat, userLong));
-        }
-        return response;
-    }
 }
