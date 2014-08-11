@@ -8,6 +8,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
@@ -25,12 +26,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener
+public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener
 {
-    private static final String STATE_RESPONSE = "response";
+    private static final String
+            STATE_RESPONSE = "response",
+            STATE_LAT = "latitude",
+            STATE_LONG = "longitude";
     private List<Photo> photos = new ArrayList<Photo>();
 
     PanoramioResponse panoramioResponse;
+    PanoramioRequest panoramioRequest = null;
+    float latitude=Float.NaN,
+            longitude=Float.NaN;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,11 +49,14 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         if (savedInstanceState != null)
         {
             panoramioResponse = savedInstanceState.getParcelable(STATE_RESPONSE);
+            latitude = savedInstanceState.getFloat(STATE_LAT);
+            longitude = savedInstanceState.getFloat(STATE_LONG);
         }
 
         GridView gridView = (GridView) findViewById(R.id.gridView);
         gridView.setOnItemClickListener(this);
         gridView.setAdapter(new PhotoGridAdapter(this, photos));
+        gridView.setOnScrollListener(this);
 
         if (panoramioResponse == null)
             acquireLocation();
@@ -75,6 +86,8 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     {
         super.onSaveInstanceState(outState);
         outState.putParcelable(STATE_RESPONSE, panoramioResponse);
+        outState.putFloat(STATE_LAT, latitude);
+        outState.putFloat(STATE_LONG, longitude);
     }
 
     void acquireLocation()
@@ -85,7 +98,9 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             @Override
             public void onLocationChanged(Location location)
             {
-                requestPhotos((float)location.getLatitude(), (float)location.getLongitude());
+                latitude = (float) location.getLatitude();
+                longitude = (float) location.getLongitude();
+                requestPhotos(latitude, longitude);
                 locationManager.removeUpdates(this);
             }
 
@@ -113,18 +128,19 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 
     void requestPhotos(float lat, float lng)
     {
-        requestPhotos(lat, lng, 0, 100);
+        requestPhotos(lat, lng, 0);
     }
 
-    void requestPhotos(float lat, float lng, int from, int to)
+    void requestPhotos(float lat, float lng, int from)
     {
-        PanoramioRequest panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from, to)
+        panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from)
         {
             @Override
             protected void deliverResponse(PanoramioResponse response)
             {
                 super.deliverResponse(response);
                 onPanoramioResponse(response);
+                panoramioRequest = null;
             }
         };
         panoramioRequest.setTag(this);
@@ -134,12 +150,18 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     @Override
     public void onErrorResponse(VolleyError error)
     {
+        panoramioRequest = null;
         error.printStackTrace();
         new AlertDialog.Builder(this)
                 .setTitle(R.string.error)
                 .setMessage(error.getMessage())
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
+    }
+
+    boolean isRequestPending()
+    {
+        return panoramioRequest != null;
     }
 
     @Override
@@ -150,5 +172,20 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         intent.putExtra(PhotoActivity.ARG_SELECTED_INDEX, position);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView absListView, int scrollState)
+    {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+    {
+        if (totalItemCount <= firstVisibleItem+visibleItemCount && !isRequestPending() && Float.isNaN(latitude) == false && totalItemCount < panoramioResponse.getCount())
+        {
+            requestPhotos(latitude, longitude, photos.size());
+        }
     }
 }
