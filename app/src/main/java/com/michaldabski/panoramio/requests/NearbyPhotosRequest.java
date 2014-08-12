@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest.requests;
+package com.michaldabski.panoramio.requests;
 
 import com.android.volley.Response;
 

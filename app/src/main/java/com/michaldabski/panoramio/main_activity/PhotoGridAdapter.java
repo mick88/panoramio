@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest.main_activity;
+package com.michaldabski.panoramio.main_activity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.michaldabski.panoramiotest.R;
-import com.michaldabski.panoramiotest.models.Photo;
-import com.michaldabski.panoramiotest.utils.VolleySingleton;
+import com.michaldabski.panoramio.R;
+import com.michaldabski.panoramio.models.Photo;
+import com.michaldabski.panoramio.utils.VolleySingleton;
 
 import java.util.List;
 

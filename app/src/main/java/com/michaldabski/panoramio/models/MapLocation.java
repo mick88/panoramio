@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest.models;
+package com.michaldabski.panoramio.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

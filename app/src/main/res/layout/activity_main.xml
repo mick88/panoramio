@@ -9,6 +9,6 @@
           android:stretchMode="columnWidth"
           android:columnWidth="@dimen/thumb_size"
           android:drawSelectorOnTop="true"
-          tools:context="com.michaldabski.panoramiotest.main_activity.MainActivity"
+          tools:context="com.michaldabski.panoramio.main_activity.MainActivity"
           android:fastScrollEnabled="true"
           tools:listitem="@layout/item_photo"/>

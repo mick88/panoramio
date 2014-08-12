@@ -1,9 +1,9 @@
-package com.michaldabski.panoramiotest.requests;
+package com.michaldabski.panoramio.requests;
 
 import android.util.Log;
 
 import com.android.volley.Response;
-import com.michaldabski.panoramiotest.models.PanoramioResponse;
+import com.michaldabski.panoramio.models.PanoramioResponse;
 
 /**
  * Created by Michal on 08/08/2014.

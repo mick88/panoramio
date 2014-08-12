@@ -1,10 +1,10 @@
-package com.michaldabski.panoramiotest;
+package com.michaldabski.panoramio;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
-import com.michaldabski.panoramiotest.models.Photo;
-import com.michaldabski.panoramiotest.utils.PhotoDistanceComparator;
+import com.michaldabski.panoramio.models.Photo;
+import com.michaldabski.panoramio.utils.PhotoDistanceComparator;
 
 import junit.framework.Assert;
 

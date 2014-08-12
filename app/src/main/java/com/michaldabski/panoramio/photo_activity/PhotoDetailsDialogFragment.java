@@ -1,12 +1,12 @@
-package com.michaldabski.panoramiotest.photo_activity;
+package com.michaldabski.panoramio.photo_activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 
-import com.michaldabski.panoramiotest.R;
-import com.michaldabski.panoramiotest.models.Photo;
+import com.michaldabski.panoramio.R;
+import com.michaldabski.panoramio.models.Photo;
 
 import java.util.Locale;
 

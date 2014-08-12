@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest.photo_activity;
+package com.michaldabski.panoramio.photo_activity;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.michaldabski.panoramiotest.R;
-import com.michaldabski.panoramiotest.models.Photo;
-import com.michaldabski.panoramiotest.utils.VolleySingleton;
+import com.michaldabski.panoramio.R;
+import com.michaldabski.panoramio.models.Photo;
+import com.michaldabski.panoramio.utils.VolleySingleton;
 
 import java.util.Locale;
 

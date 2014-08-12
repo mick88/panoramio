@@ -1,6 +1,6 @@
-package com.michaldabski.panoramiotest.utils;
+package com.michaldabski.panoramio.utils;
 
-import com.michaldabski.panoramiotest.models.Photo;
+import com.michaldabski.panoramio.models.Photo;
 
 import java.util.Comparator;
 

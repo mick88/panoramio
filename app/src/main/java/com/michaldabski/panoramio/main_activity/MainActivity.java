@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest.main_activity;
+package com.michaldabski.panoramio.main_activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,13 +15,13 @@ import android.widget.GridView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.michaldabski.panoramiotest.R;
-import com.michaldabski.panoramiotest.models.PanoramioResponse;
-import com.michaldabski.panoramiotest.models.Photo;
-import com.michaldabski.panoramiotest.photo_activity.PhotoActivity;
-import com.michaldabski.panoramiotest.requests.NearbyPhotosRequest;
-import com.michaldabski.panoramiotest.requests.PanoramioRequest;
-import com.michaldabski.panoramiotest.utils.VolleySingleton;
+import com.michaldabski.panoramio.R;
+import com.michaldabski.panoramio.models.PanoramioResponse;
+import com.michaldabski.panoramio.models.Photo;
+import com.michaldabski.panoramio.photo_activity.PhotoActivity;
+import com.michaldabski.panoramio.requests.NearbyPhotosRequest;
+import com.michaldabski.panoramio.requests.PanoramioRequest;
+import com.michaldabski.panoramio.utils.VolleySingleton;
 
 import java.util.ArrayList;
 import java.util.Collection;

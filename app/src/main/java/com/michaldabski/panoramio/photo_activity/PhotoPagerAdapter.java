@@ -1,10 +1,10 @@
-package com.michaldabski.panoramiotest.photo_activity;
+package com.michaldabski.panoramio.photo_activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
-import com.michaldabski.panoramiotest.models.Photo;
+import com.michaldabski.panoramio.models.Photo;
 
 import java.util.List;
 

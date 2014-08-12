@@ -1,4 +1,4 @@
-package com.michaldabski.panoramiotest.photo_activity;
+package com.michaldabski.panoramio.photo_activity;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

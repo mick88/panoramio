@@ -1,12 +1,12 @@
-package com.michaldabski.panoramiotest.photo_activity;
+package com.michaldabski.panoramio.photo_activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 
-import com.michaldabski.panoramiotest.R;
-import com.michaldabski.panoramiotest.models.Photo;
+import com.michaldabski.panoramio.R;
+import com.michaldabski.panoramio.models.Photo;
 
 import java.util.ArrayList;
 import java.util.List;

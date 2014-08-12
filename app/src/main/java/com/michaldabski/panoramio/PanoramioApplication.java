@@ -1,8 +1,8 @@
-package com.michaldabski.panoramiotest;
+package com.michaldabski.panoramio;
 
 import android.app.Application;
 
-import com.michaldabski.panoramiotest.utils.VolleySingleton;
+import com.michaldabski.panoramio.utils.VolleySingleton;
 
 /**
  * Created by Michal on 10/08/2014.
