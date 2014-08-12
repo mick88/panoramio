@@ -1,0 +1,5 @@
+<resources>
+    <style name="picture_map_layout">
+        <item name="android:orientation">horizontal</item>
+    </style>
+</resources>

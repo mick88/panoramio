@@ -11,12 +11,13 @@
         android:id="@+id/viewPager"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         />
 
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
         android:id="@+id/fragmentMap"
         android:tag="map"
         android:name="com.google.android.gms.maps.MapFragment"/>
