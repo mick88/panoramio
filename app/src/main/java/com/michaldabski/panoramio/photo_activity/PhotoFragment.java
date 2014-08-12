@@ -1,8 +1,6 @@
 package com.michaldabski.panoramio.photo_activity;
 
 import android.app.Fragment;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,8 +14,6 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.michaldabski.panoramio.R;
 import com.michaldabski.panoramio.models.Photo;
 import com.michaldabski.panoramio.utils.VolleySingleton;
-
-import java.util.Locale;
 
 /**
  * Created by Michal on 10/08/2014.
@@ -48,16 +44,6 @@ public class PhotoFragment extends Fragment
     {
         switch (item.getItemId())
         {
-            case R.id.actionLocation:
-                final String uri = String.format(Locale.ENGLISH, "geo:0,0?q=%f,%f(%s)",
-                        photo.getLatitude(), photo.getLongitude(), photo.getPhotoTitle());
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(uri));
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                }
-                break;
-
             case R.id.actionDetails:
                 PhotoDetailsDialogFragment.newInstance(photo)
                         .show(getFragmentManager(), PhotoDetailsDialogFragment.TAG);
