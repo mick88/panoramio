@@ -147,6 +147,10 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
             final CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(photo.getLatitude(), photo.getLongitude()), MAP_ZOOM_LEVEL);
             if (animate) map.animateCamera(cameraUpdate);
             else map.moveCamera(cameraUpdate);
+
+            for (Map.Entry<Marker, Photo> entry : markerPhotoMap.entrySet())
+                if (entry.getValue().equals(photo))
+                    entry.getKey().showInfoWindow();
         }
     }
 
