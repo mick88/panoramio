@@ -8,18 +8,21 @@ import com.android.volley.Response;
 public class NearbyPhotosRequest extends PanoramioRequest
 {
     public static final int NUM_PHOTOS = 30;
+    private static final float
+            LAT_MULTIPLIER = 0.4f,
+            LON_MULTIPLIER = 1f;
     private final float userLat, userLong;
 
-    public NearbyPhotosRequest(Response.ErrorListener listener, float latitude, float longitude, int from, int to)
+    public NearbyPhotosRequest(Response.ErrorListener listener, float latitude, float longitude, int from, int to, float distance)
     {
-        super(listener, longitude-1f, latitude-1f, longitude+1f, latitude+1f, from, to);
+        super(listener, longitude-(distance* LON_MULTIPLIER), latitude-(distance* LAT_MULTIPLIER), longitude+(distance*LON_MULTIPLIER), latitude+(distance*LAT_MULTIPLIER), from, to);
         userLat = latitude;
         userLong = longitude;
     }
 
-    public NearbyPhotosRequest(Response.ErrorListener listener, float latitude, float longitude, int from)
+    public NearbyPhotosRequest(Response.ErrorListener listener, float latitude, float longitude, int from, float distance)
     {
-        this(listener, latitude, longitude, from, from+NUM_PHOTOS);
+        this(listener, latitude, longitude, from, from+NUM_PHOTOS, distance);
     }
 
 }

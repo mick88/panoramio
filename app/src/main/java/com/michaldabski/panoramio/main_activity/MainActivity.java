@@ -138,7 +138,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     void requestPhotos(float lat, float lng, int from)
     {
         setProgressBarIndeterminateVisibility(true);
-        panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from)
+        panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from, 0.1f)
         {
             @Override
             protected void deliverResponse(PanoramioResponse response)
