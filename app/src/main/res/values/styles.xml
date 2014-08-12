@@ -15,4 +15,8 @@
         <item name="android:background">#2000</item>
         <item name="android:layout_margin">2dp</item>
     </style>
+
+    <style name="picture_map_layout">
+        <item name="android:orientation">vertical</item>
+    </style>
 </resources>
