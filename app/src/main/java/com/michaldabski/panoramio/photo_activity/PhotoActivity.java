@@ -142,7 +142,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         if (mapFragment == null) return;
         GoogleMap map = mapFragment.getMap();
-        if (map != null)
+        if (map != null && findViewById(R.id.fragmentMap).getVisibility() == View.VISIBLE)
         {
             final CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(photo.getLatitude(), photo.getLongitude()), MAP_ZOOM_LEVEL);
             if (animate) map.animateCamera(cameraUpdate);
