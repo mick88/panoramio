@@ -27,7 +27,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
             ARG_SELECTED_INDEX = "selected_photo";
     private static final String
         STATE_MAP_VISIBILITY = "map_visibility";
-    private static final float MAP_ZOOM_LEVEL = 17f;
+    private static final float MAP_ZOOM_LEVEL = 15f;
     ViewPager viewPager;
     List<Photo> photos;
     MapFragment mapFragment;
