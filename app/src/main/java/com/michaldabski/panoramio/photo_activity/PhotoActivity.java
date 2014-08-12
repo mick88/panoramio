@@ -111,6 +111,15 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     }
 
     @Override
+    public void onBackPressed()
+    {
+        if (findViewById(R.id.fragmentMap).getVisibility() == View.VISIBLE)
+            findViewById(R.id.fragmentMap).setVisibility(View.GONE);
+        else
+            super.onBackPressed();
+    }
+
+    @Override
     public void onPageScrolled(int i, float v, int i2)
     {
 
