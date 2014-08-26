@@ -1,6 +1,8 @@
 package com.michaldabski.panoramio.photo_activity;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -37,6 +40,15 @@ public class PhotoFragment extends Fragment
     {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.photo, menu);
+
+        MenuItem item = menu.findItem(R.id.actionSharePhotoUrl);
+        ShareActionProvider actionProvider = (ShareActionProvider) item.getActionProvider();
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setData(Uri.parse(photo.getUrl()));
+        shareIntent.setType("text/*");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, photo.getUrl());
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, photo.getPhotoTitle());
+        actionProvider.setShareIntent(shareIntent);
     }
 
     @Override
