@@ -47,6 +47,7 @@ public class PhotoFragment extends Fragment
         shareIntent.setData(Uri.parse(photo.getUrl()));
         shareIntent.setType("text/*");
         shareIntent.putExtra(Intent.EXTRA_TEXT, photo.getUrl());
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, photo.getPhotoTitle());
         actionProvider.setShareIntent(shareIntent);
     }
 
