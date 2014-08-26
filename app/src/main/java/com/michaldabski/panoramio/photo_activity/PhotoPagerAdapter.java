@@ -2,7 +2,7 @@ package com.michaldabski.panoramio.photo_activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 
 import com.michaldabski.panoramio.models.Photo;
 
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Michal on 10/08/2014.
  */
-public class PhotoPagerAdapter extends FragmentPagerAdapter
+public class PhotoPagerAdapter extends FragmentStatePagerAdapter
 {
     private final List<Photo> photos;
 
