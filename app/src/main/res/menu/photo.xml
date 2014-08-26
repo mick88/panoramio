@@ -3,5 +3,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/actionDetails"
+        android:orderInCategory="3"
         android:title="@string/details"/>
+
+    <item
+        android:id="@+id/actionSharePhotoUrl"
+        android:title="@string/share_photo"
+        android:orderInCategory="2"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        />
 </menu>
