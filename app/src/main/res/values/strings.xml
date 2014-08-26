@@ -6,7 +6,7 @@
     <string name="location">Location</string>
     <string name="details">Details</string>
     <string name="photo_details">Photo details</string>
-    <string name="title_activity_main">Nearby Pictures</string>
+    <string name="title_activity_main">@string/app_name</string>
     <string name="title_activity_map">Map</string>
     <string name="share_photo">Share photo</string>
 
