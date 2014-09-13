@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PhotoActivity extends Activity implements ViewPager.OnPageChangeListener, GoogleMap.OnMarkerClickListener
+public class PhotoActivity extends Activity implements ViewPager.OnPageChangeListener, GoogleMap.OnMarkerClickListener, View.OnSystemUiVisibilityChangeListener
 {
     public static final String
             ARG_PHOTOS_ARRAY = "photos",
@@ -209,7 +209,9 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     public void enableFullscreen()
     {
         fullscreen = true;
-        findViewById(R.id.viewPager).setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        View view = findViewById(R.id.viewPager);
+        view.setOnSystemUiVisibilityChangeListener(this);
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -228,5 +230,12 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
             disableFullScreen();
         else enableFullscreen();
         return isFullscreen();
+    }
+
+    @Override
+    public void onSystemUiVisibilityChange(int visibility)
+    {
+        if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0)
+            fullscreen = false;
     }
 }
