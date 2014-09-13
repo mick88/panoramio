@@ -24,3 +24,6 @@ local.properties
 .gradle
 build/
 *.iml
+
+# Misc
+Thumbs.db
