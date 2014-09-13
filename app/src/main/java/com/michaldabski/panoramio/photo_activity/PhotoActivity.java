@@ -1,10 +1,12 @@
 package com.michaldabski.panoramio.photo_activity;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +48,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
+        setupActionbar(getActionBar());
 
         Bundle extras = getIntent().getExtras();
         Parcelable[] parcelableArray = extras.getParcelableArray(ARG_PHOTOS_ARRAY);
@@ -82,6 +85,13 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
         }
     }
 
+    void setupActionbar(ActionBar actionBar)
+    {
+        if (actionBar == null) return;
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -108,6 +118,9 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         switch (item.getItemId())
         {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             case R.id.actionLocation:
                 View view = findViewById(R.id.fragmentMap);
                 if (view.getVisibility() == View.VISIBLE)
