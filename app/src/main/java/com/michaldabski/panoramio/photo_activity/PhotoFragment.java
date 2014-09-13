@@ -21,7 +21,7 @@ import com.michaldabski.panoramio.utils.VolleySingleton;
 /**
  * Created by Michal on 10/08/2014.
  */
-public class PhotoFragment extends Fragment
+public class PhotoFragment extends Fragment implements View.OnClickListener
 {
     public static final String ARG_PHOTO = "photo";
     Photo photo;
@@ -78,6 +78,7 @@ public class PhotoFragment extends Fragment
         PhotoActivity activity = (PhotoActivity) getActivity();
         NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.imgImage);
         imageView.setImageUrl(photo.getUrl(), VolleySingleton.getInstance(getActivity()).getImageLoader());
+        imageView.setOnClickListener(this);
 
         TextView tvAuthor = (TextView) view.findViewById(R.id.tvAuthor);
         tvAuthor.setText(photo.getOwnerName());
@@ -90,5 +91,23 @@ public class PhotoFragment extends Fragment
         PhotoFragment fragment = new PhotoFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    void toggleFullscreen()
+    {
+        PhotoActivity photoActivity = (PhotoActivity) getActivity();
+        photoActivity.toggleFullscreen();
+
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.imgImage:
+                toggleFullscreen();
+                break;
+        }
     }
 }
