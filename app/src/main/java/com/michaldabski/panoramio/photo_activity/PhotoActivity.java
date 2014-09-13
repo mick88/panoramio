@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.michaldabski.panoramio.R;
 import com.michaldabski.panoramio.models.Photo;
+import com.michaldabski.panoramio.utils.MiscUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,8 +68,12 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
             findViewById(R.id.fragmentMap).setVisibility(visibility);
         }
 
-        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMap);
-        setupMap(mapFragment.getMap());
+        if (MiscUtils.isGooglePlayAvailable(this))
+        {
+            mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMap);
+            if (mapFragment.getMap() != null)
+                setupMap(mapFragment.getMap());
+        }
     }
 
     @Override
@@ -76,6 +81,11 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.photos, menu);
+
+        if (MiscUtils.isGooglePlayAvailable(this) == false)
+        {
+            menu.findItem(R.id.actionLocation).setVisible(false);
+        }
         return true;
     }
 
