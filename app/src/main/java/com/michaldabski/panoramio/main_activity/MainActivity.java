@@ -3,6 +3,7 @@ package com.michaldabski.panoramio.main_activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,6 +27,7 @@ import com.michaldabski.panoramio.utils.VolleySingleton;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener
 {
@@ -126,8 +129,23 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 
             }
         };
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        String bestProvider = locationManager.getBestProvider(criteria, true);
+        if (bestProvider != null && locationManager.isProviderEnabled(bestProvider))
+        {
+            locationManager.requestLocationUpdates(bestProvider, 0, 0, locationListener);
+        }
+        else
+        {
+            Random random = new Random(System.currentTimeMillis());
+            Location location = new Location(LocationManager.NETWORK_PROVIDER);
+            location.setAccuracy(1f);
+            location.setLatitude((random.nextDouble() * 180d) - 90d);
+            location.setLongitude((random.nextDouble() * 360d) - 180d);
+            locationListener.onLocationChanged(location);
+            Toast.makeText(this, "No location provider. Using random location.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     void requestPhotos(float lat, float lng)
