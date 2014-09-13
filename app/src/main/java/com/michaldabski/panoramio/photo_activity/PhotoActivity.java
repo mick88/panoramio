@@ -1,6 +1,8 @@
 package com.michaldabski.panoramio.photo_activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
@@ -30,12 +32,14 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
             ARG_PHOTOS_ARRAY = "photos",
             ARG_SELECTED_INDEX = "selected_photo";
     private static final String
+        STATE_FULLSCREEN = "fullscreen",
         STATE_MAP_VISIBILITY = "map_visibility";
     private static final float MAP_ZOOM_LEVEL = 15f;
     ViewPager viewPager;
     List<Photo> photos;
     MapFragment mapFragment;
     Map<Marker, Photo> markerPhotoMap;
+    private boolean fullscreen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,6 +70,8 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
             int visibility = savedInstanceState.getInt(STATE_MAP_VISIBILITY, View.GONE);
             //noinspection ResourceType
             findViewById(R.id.fragmentMap).setVisibility(visibility);
+            if (savedInstanceState.getBoolean(STATE_FULLSCREEN))
+                enableFullscreen();
         }
 
         if (MiscUtils.isGooglePlayAvailable(this))
@@ -94,6 +100,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_MAP_VISIBILITY, findViewById(R.id.fragmentMap).getVisibility());
+        outState.putBoolean(STATE_FULLSCREEN, fullscreen);
     }
 
     @Override
@@ -187,5 +194,39 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
             return true;
         }
         else return false;
+    }
+
+    public void disableFullScreen()
+    {
+        fullscreen = false;
+
+        findViewById(R.id.viewPager).setSystemUiVisibility(
+                0
+        );
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public void enableFullscreen()
+    {
+        fullscreen = true;
+        findViewById(R.id.viewPager).setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+    public boolean isFullscreen()
+    {
+        return fullscreen;
+    }
+
+    public boolean toggleFullscreen()
+    {
+        if (isFullscreen())
+            disableFullScreen();
+        else enableFullscreen();
+        return isFullscreen();
     }
 }
