@@ -241,6 +241,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        findViewById(R.id.tvCopyright).setVisibility(View.GONE);
     }
 
     public boolean isFullscreen()
@@ -261,5 +262,6 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0)
             fullscreen = false;
+        findViewById(R.id.tvCopyright).setVisibility(fullscreen?View.GONE:View.VISIBLE);
     }
 }
