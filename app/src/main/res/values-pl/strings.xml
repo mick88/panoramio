@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pobliskie Zdjęcia</string>
+    <string name="by_s">Autor: %s</string>
+    <string name="copyright">Wszelkie prawa do zdjęć zastrzeżone przez ich autorów</string>
+    <string name="details">Szczegóły</string>
+    <string name="error">Błąd</string>
+    <string name="map">Mapa</string>
+    <string name="photo_details">Szczegóły zdjęcia</string>
+    <string name="share_photo">Wyślij zdjęcie</string>
+</resources>
