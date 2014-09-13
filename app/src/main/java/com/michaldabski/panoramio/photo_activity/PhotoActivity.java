@@ -77,6 +77,8 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
                 enableFullscreen();
         }
 
+        setPhotoTitleAndAuthor(getActionBar(), photos.get(viewPager.getCurrentItem()));
+
         if (MiscUtils.isGooglePlayAvailable(this))
         {
             mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMap);
@@ -188,6 +190,15 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     public void onPageSelected(int position)
     {
         showPhotoLocation(photos.get(position), true);
+        setPhotoTitleAndAuthor(getActionBar(), photos.get(position));
+    }
+
+    void setPhotoTitleAndAuthor(ActionBar actionBar, Photo photo)
+    {
+        if (actionBar == null) return;
+
+        actionBar.setTitle(photo.getPhotoTitle());
+        actionBar.setSubtitle(getString(R.string.by_s, photo.getOwnerName()));
     }
 
     @Override

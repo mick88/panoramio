@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ShareActionProvider;
-import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.michaldabski.panoramio.R;
@@ -80,8 +79,6 @@ public class PhotoFragment extends Fragment implements View.OnClickListener
         imageView.setImageUrl(photo.getUrl(), VolleySingleton.getInstance(getActivity()).getImageLoader());
         imageView.setOnClickListener(this);
 
-        TextView tvAuthor = (TextView) view.findViewById(R.id.tvAuthor);
-        tvAuthor.setText(photo.getOwnerName());
     }
 
     public static PhotoFragment newInstance(Photo photo)
