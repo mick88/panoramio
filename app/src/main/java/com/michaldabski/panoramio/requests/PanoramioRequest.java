@@ -5,6 +5,8 @@ import android.util.Log;
 import com.android.volley.Response;
 import com.michaldabski.panoramio.models.PanoramioResponse;
 
+import java.util.Locale;
+
 /**
  * Created by Michal on 08/08/2014.
  */
@@ -26,6 +28,6 @@ public class PanoramioRequest extends GsonRequest<PanoramioResponse>
 
     private static String buildUrl(float minx, float miny, float maxx, float maxy, int from, int to)
     {
-        return String.format(URL_TEMPLATE, from, to, minx, miny, maxx, maxy);
+        return String.format(Locale.ENGLISH, URL_TEMPLATE, from, to, minx, miny, maxx, maxy);
     }
 }
