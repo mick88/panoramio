@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Panoramio</string>
+    <string name="app_name">Nearby Photos</string>
     <string name="error">Error</string>
     <string name="location">Location</string>
     <string name="details">Details</string>
