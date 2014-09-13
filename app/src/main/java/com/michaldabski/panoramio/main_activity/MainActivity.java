@@ -131,6 +131,10 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         };
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(false);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
         String bestProvider = locationManager.getBestProvider(criteria, true);
         if (bestProvider != null && locationManager.isProviderEnabled(bestProvider))
         {
