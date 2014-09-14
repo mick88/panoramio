@@ -8,8 +8,6 @@ import android.os.Bundle;
 import com.michaldabski.panoramio.R;
 import com.michaldabski.panoramio.models.Photo;
 
-import java.util.Locale;
-
 /**
  * Created by Michal on 10/08/2014.
  */
@@ -31,15 +29,11 @@ public class PhotoDetailsDialogFragment extends DialogFragment
 
     CharSequence getPhotoDetails(Photo photo)
     {
-        return String.format(Locale.ENGLISH, "Title: %s\n" +
-                "Owner: %s\n" +
-                "Location: %f %f\n" +
-                "Size: %d x %d px\n" +
-                "Upload date: %s",
-                photo.getPhotoTitle(), photo.getOwnerName(),
-                photo.getLatitude(), photo.getLongitude(),
-                photo.getWidth(), photo.getHeight(),
-                photo.getUploadDate());
+        return getString(R.string.photo_details_template,
+            photo.getPhotoTitle(), photo.getOwnerName(),
+            photo.getLatitude(), photo.getLongitude(),
+            photo.getWidth(), photo.getHeight(),
+            photo.getUploadDate());
     }
 
     public static PhotoDetailsDialogFragment newInstance(Photo photo)

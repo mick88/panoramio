@@ -10,5 +10,5 @@
     <string name="share_photo">Share photo</string>
     <string name="by_s">by %s</string>
     <string name="copyright">Photos are copyrighted by their owners</string>
-
+    <string name="photo_details_template">Title: %1$s\nOwner: %2$s\nLocation: %3$f %4$f\nSize: %5$d x %6$d px\nUpload date: %7$s</string>
 </resources>
