@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -99,6 +100,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         GridView gridView = (GridView) findViewById(R.id.gridView);
         PhotoGridAdapter adapter = (PhotoGridAdapter) gridView.getAdapter();
         adapter.notifyDataSetChanged();
+        findViewById(R.id.progressContainer).setVisibility(View.GONE);
     }
 
     void onPanoramioResponse(PanoramioResponse response)
@@ -200,6 +202,8 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 
     void requestPhotos(float lat, float lng)
     {
+        TextView tvProgress = (TextView) findViewById(R.id.tvProgress);
+        tvProgress.setText(R.string.progress_photos);
         requestPhotos(lat, lng, 0);
     }
 
