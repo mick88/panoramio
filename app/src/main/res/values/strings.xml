@@ -22,4 +22,5 @@
     <string name="share_attach_text">Check out this app!</string>
     <string name="progress_location">Acquiring location…</string>
     <string name="progress_photos">Downloading photos…</string>
+    <string name="no_location_provider">No location provider. Using random location.</string>
 </resources>

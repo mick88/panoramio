@@ -18,4 +18,5 @@
     <string name="visit_website">Odwiedź stronę www autora</string>
     <string name="progress_location">Pozyskiwanie lokalizacji…</string>
     <string name="progress_photos">Pobieranie zdjęć…</string>
+    <string name="no_location_provider">Lokalizacja niedostępna. Losowa likalizacja zostanie użyta.</string>
 </resources>

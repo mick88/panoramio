@@ -196,7 +196,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             location.setLatitude((random.nextDouble() * 180d) - 90d);
             location.setLongitude((random.nextDouble() * 360d) - 180d);
             locationListener.onLocationChanged(location);
-            Toast.makeText(this, "No location provider. Using random location.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_location_provider, Toast.LENGTH_SHORT).show();
         }
     }
 
