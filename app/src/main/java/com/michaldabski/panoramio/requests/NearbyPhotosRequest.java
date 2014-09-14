@@ -7,7 +7,7 @@ import com.android.volley.Response;
  */
 public class NearbyPhotosRequest extends PanoramioRequest
 {
-    public static final int NUM_PHOTOS = 30;
+    public static final int NUM_PHOTOS = 50;
     private static final float
             LAT_MULTIPLIER = 0.4f,
             LON_MULTIPLIER = 1f;
