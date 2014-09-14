@@ -33,8 +33,10 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 {
     private static final String
             STATE_RESPONSE = "response",
+            STATE_DISTANCE = "distance",
             STATE_LAT = "latitude",
             STATE_LONG = "longitude";
+    private float distance = 0.1f;
     private ArrayList<Photo> photos = new ArrayList<Photo>();
 
     PanoramioResponse panoramioResponse;
@@ -55,6 +57,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             panoramioResponse = savedInstanceState.getParcelable(STATE_RESPONSE);
             latitude = savedInstanceState.getFloat(STATE_LAT);
             longitude = savedInstanceState.getFloat(STATE_LONG);
+            distance = savedInstanceState.getFloat(STATE_DISTANCE);
         }
 
         GridView gridView = (GridView) findViewById(R.id.gridView);
@@ -82,9 +85,18 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 
     void onPanoramioResponse(PanoramioResponse response)
     {
-        this.panoramioResponse = response;
-        addPhotos(panoramioResponse.getPhotos());
-        panoramioResponse.setPhotos(this.photos);
+        if (response.isEmpty())
+        {
+            // if no photos received, increase area and try again
+            distance *= 3;
+            requestPhotos(latitude, longitude);
+        }
+        else
+        {
+            this.panoramioResponse = response;
+            addPhotos(panoramioResponse.getPhotos());
+            panoramioResponse.setPhotos(this.photos);
+        }
     }
 
     @Override
@@ -94,6 +106,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         outState.putParcelable(STATE_RESPONSE, panoramioResponse);
         outState.putFloat(STATE_LAT, latitude);
         outState.putFloat(STATE_LONG, longitude);
+        outState.putFloat(STATE_DISTANCE, distance);
     }
 
     void acquireLocation()
@@ -160,7 +173,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     void requestPhotos(float lat, float lng, int from)
     {
         setProgressBarIndeterminateVisibility(true);
-        panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from, 0.1f)
+        panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from, distance)
         {
             @Override
             protected void deliverResponse(PanoramioResponse response)

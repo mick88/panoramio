@@ -35,6 +35,11 @@ public class PanoramioResponse implements Parcelable
         return hasMore;
     }
 
+    public boolean isEmpty()
+    {
+        return photos.isEmpty();
+    }
+
     public MapLocation getMapLocation()
     {
         return mapLocation;
