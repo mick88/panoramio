@@ -8,4 +8,5 @@
     <string name="map">Mapa</string>
     <string name="photo_details">Szczegóły zdjęcia</string>
     <string name="share_photo">Wyślij zdjęcie</string>
+    <string name="photo_details_template">Tytuł: %1$s\nAutor: %2$s\nLokalizacja: %3$f %4$f\nWymiary: %5$d x %6$d px\nData publ.: %7$s</string>
 </resources>
