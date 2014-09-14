@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="BaseTheme" parent="android:Theme.Material" />
+    <style name="BaseTheme" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@android:color/black</item>
+        <item name="android:colorPrimaryDark">@android:color/black</item>
+        <item name="android:colorAccent">@android:color/holo_blue_bright</item>
+    </style>
+
     <style name="BaseActionbarTheme" parent="android:Widget.Material.ActionBar.Solid" />
     <style name="BaseDialogTheme" parent="android:Theme.Material.Dialog" />
 </resources>
