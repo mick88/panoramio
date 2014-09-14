@@ -3,13 +3,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/actionDetails"
-        android:orderInCategory="3"
+        android:orderInCategory="2"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_info"
         android:title="@string/details"/>
 
     <item
         android:id="@+id/actionSharePhotoUrl"
         android:title="@string/share_photo"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
+        android:showAsAction="ifRoom"
         android:actionProviderClass="android.widget.ShareActionProvider"
         />
 </menu>
