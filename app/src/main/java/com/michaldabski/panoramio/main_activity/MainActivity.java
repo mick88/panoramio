@@ -12,10 +12,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -56,7 +56,6 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState != null)
@@ -101,6 +100,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         GridView gridView = (GridView) findViewById(R.id.gridView);
         PhotoGridAdapter adapter = (PhotoGridAdapter) gridView.getAdapter();
         adapter.notifyDataSetChanged();
+        findViewById(R.id.progressContainer).setVisibility(View.GONE);
     }
 
     void onPanoramioResponse(PanoramioResponse response)
@@ -133,7 +133,6 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     void acquireLocation()
     {
         final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        setProgressBarIndeterminateVisibility(true);
         LocationListener locationListener = new LocationListener()
         {
             @Override
@@ -203,12 +202,13 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
 
     void requestPhotos(float lat, float lng)
     {
+        TextView tvProgress = (TextView) findViewById(R.id.tvProgress);
+        tvProgress.setText(R.string.progress_photos);
         requestPhotos(lat, lng, 0);
     }
 
     void requestPhotos(float lat, float lng, int from)
     {
-        setProgressBarIndeterminateVisibility(true);
         panoramioRequest = new NearbyPhotosRequest(this, lat, lng, from, distance)
         {
             @Override
@@ -217,7 +217,6 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
                 super.deliverResponse(response);
                 onPanoramioResponse(response);
                 panoramioRequest = null;
-                setProgressBarIndeterminateVisibility(false);
             }
         };
         panoramioRequest.setTag(this);
@@ -228,7 +227,6 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     public void onErrorResponse(VolleyError error)
     {
         panoramioRequest = null;
-        setProgressBarIndeterminateVisibility(false);
         error.printStackTrace();
         new AlertDialog.Builder(this)
                 .setTitle(R.string.error)

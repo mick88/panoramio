@@ -20,4 +20,6 @@
     <string name="github" translatable="false">GitHub</string>
     <string name="share_app">Share this app</string>
     <string name="share_attach_text">Check out this app!</string>
+    <string name="progress_location">Acquiring location…</string>
+    <string name="progress_photos">Downloading photos…</string>
 </resources>

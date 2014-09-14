@@ -16,6 +16,8 @@
               android:drawSelectorOnTop="true"
               android:fastScrollEnabled="true"
               tools:listitem="@layout/item_photo"/>
+    <include
+        layout="@layout/progress"/>
 
     <include
         layout="@layout/copyright"

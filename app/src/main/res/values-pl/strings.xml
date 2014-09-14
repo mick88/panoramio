@@ -16,4 +16,6 @@
     <string name="share_attach_text">Zobacz tą aplikację!</string>
     <string name="version_s">Wersja %s</string>
     <string name="visit_website">Odwiedź stronę www autora</string>
+    <string name="progress_location">Pozyskiwanie lokalizacji…</string>
+    <string name="progress_photos">Pobieranie zdjęć…</string>
 </resources>
