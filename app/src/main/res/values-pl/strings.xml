@@ -9,4 +9,11 @@
     <string name="photo_details">Szczegóły zdjęcia</string>
     <string name="share_photo">Wyślij zdjęcie</string>
     <string name="photo_details_template">Tytuł: %1$s\nAutor: %2$s\nLokalizacja: %3$f %4$f\nWymiary: %5$d x %6$d px\nData publ.: %7$s</string>
+    <string name="about">O aplikacji</string>
+    <string name="credits">Autorem aplikacji jest Michał Dąbski\n\nZdjęcia wyświetlane w aplikacji pochodzą z serwisu Panoramio.com i są własnością ich autorów</string>
+    <string name="playstore_link_title">Inne aplikacje</string>
+    <string name="share_app">Wyślij link do aplikacji</string>
+    <string name="share_attach_text">Zobacz tą aplikację!</string>
+    <string name="version_s">Wersja %s</string>
+    <string name="visit_website">Odwiedź stronę www autora</string>
 </resources>

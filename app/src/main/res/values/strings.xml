@@ -16,8 +16,8 @@
     <string name="credits">App developed by Michal Dabski\n\nPhotographs displayed in the app come from Panoramio.com and are property of their owners.</string>
     <string name="playstore_link_title">Other apps</string>
     <string name="visit_website">Visit website</string>
-    <string name="google_plus">Google+</string>
-    <string name="github">GitHub</string>
+    <string name="google_plus" translatable="false">Google+</string>
+    <string name="github" translatable="false">GitHub</string>
     <string name="share_app">Share this app</string>
     <string name="share_attach_text">Check out this app!</string>
 </resources>
