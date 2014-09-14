@@ -6,5 +6,5 @@
         android:showAsAction="ifRoom"
         android:icon="@drawable/ic_map"
         android:orderInCategory="1"
-        android:title="@string/location"/>
+        android:title="@string/map"/>
 </menu>

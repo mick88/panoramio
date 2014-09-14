@@ -3,7 +3,7 @@
 
     <string name="app_name">Nearby Photos</string>
     <string name="error">Error</string>
-    <string name="location">Location</string>
+    <string name="map">Map</string>
     <string name="details">Details</string>
     <string name="photo_details">Photo details</string>
     <string name="title_activity_main">@string/app_name</string>
