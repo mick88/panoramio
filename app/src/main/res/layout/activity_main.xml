@@ -1,6 +1,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.michaldabski.panoramio.main_activity.MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <GridView
@@ -13,7 +14,6 @@
               android:stretchMode="columnWidth"
               android:columnWidth="@dimen/thumb_size"
               android:drawSelectorOnTop="true"
-              tools:context="com.michaldabski.panoramio.main_activity.MainActivity"
               android:fastScrollEnabled="true"
               tools:listitem="@layout/item_photo"/>
 
