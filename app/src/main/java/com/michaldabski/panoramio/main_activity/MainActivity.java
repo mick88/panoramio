@@ -1,5 +1,6 @@
 package com.michaldabski.panoramio.main_activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import com.michaldabski.panoramio.models.Photo;
 import com.michaldabski.panoramio.photo_activity.PhotoActivity;
 import com.michaldabski.panoramio.requests.NearbyPhotosRequest;
 import com.michaldabski.panoramio.requests.PanoramioRequest;
+import com.michaldabski.panoramio.utils.AddressResolver;
 import com.michaldabski.panoramio.utils.VolleySingleton;
 
 import java.util.ArrayList;
@@ -34,9 +36,11 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
     private static final String
             STATE_RESPONSE = "response",
             STATE_DISTANCE = "distance",
+            STATE_ADDRESS = "address",
             STATE_LAT = "latitude",
             STATE_LONG = "longitude";
     private float distance = 0.1f;
+    private String address;
     private ArrayList<Photo> photos = new ArrayList<Photo>();
 
     PanoramioResponse panoramioResponse;
@@ -58,6 +62,11 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             latitude = savedInstanceState.getFloat(STATE_LAT);
             longitude = savedInstanceState.getFloat(STATE_LONG);
             distance = savedInstanceState.getFloat(STATE_DISTANCE);
+            address = savedInstanceState.getString(STATE_ADDRESS);
+
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null)
+                actionBar.setSubtitle(address);
         }
 
         GridView gridView = (GridView) findViewById(R.id.gridView);
@@ -107,6 +116,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         outState.putFloat(STATE_LAT, latitude);
         outState.putFloat(STATE_LONG, longitude);
         outState.putFloat(STATE_DISTANCE, distance);
+        outState.putString(STATE_ADDRESS, address);
     }
 
     void acquireLocation()
@@ -122,6 +132,21 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
                 longitude = (float) location.getLongitude();
                 requestPhotos(latitude, longitude);
                 locationManager.removeUpdates(this);
+
+                new AddressResolver(getApplicationContext())
+                {
+                    @Override
+                    protected void onPostExecute(String address)
+                    {
+                        if (address != null && isFinishing() == false)
+                        {
+                            MainActivity.this.address = address;
+                            ActionBar actionBar = getActionBar();
+                            if (actionBar != null)
+                                actionBar.setSubtitle(address);
+                        }
+                    }
+                }.execute(location.getLatitude(), location.getLongitude());
             }
 
             @Override
