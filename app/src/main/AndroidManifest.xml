@@ -32,6 +32,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.michaldabski.panoramio.about.AboutActivity"
+            android:theme="@style/AboutTheme"
+            android:label="@string/about" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.michaldabski.panoramio.main_activity.MainActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
