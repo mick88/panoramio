@@ -1,3 +1,3 @@
 <resources>
-    <style name="AboutTheme" parent="android:Theme.Holo.Dialog" />
+    <style name="AboutTheme" parent="BaseDialogTheme" />
 </resources>
