@@ -6,6 +6,8 @@
         <item name="android:actionBarStyle">@style/actionbar</item>
     </style>
 
+    <style name="AboutTheme" parent="AppTheme" />
+
     <style name="actionbar" parent="android:Widget.Holo.ActionBar.Solid">
         <item name="android:background">@color/semitransparent_background</item>
         <item name="android:displayOptions">showHome|showTitle</item>
