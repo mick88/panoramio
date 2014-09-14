@@ -11,4 +11,13 @@
     <string name="by_s">by %s</string>
     <string name="copyright">Photos are copyrighted by their owners</string>
     <string name="photo_details_template">Title: %1$s\nOwner: %2$s\nLocation: %3$f %4$f\nSize: %5$d x %6$d px\nUpload date: %7$s</string>
+    <string name="about">About</string>
+    <string name="version_s">Version %s</string>
+    <string name="credits">App developed by Michal Dabski\n\nPhotographs displayed in the app come from Panoramio.com and are property of their owners.</string>
+    <string name="playstore_link_title">Other apps</string>
+    <string name="visit_website">Visit website</string>
+    <string name="google_plus">Google+</string>
+    <string name="github">GitHub</string>
+    <string name="share_app">Share this app</string>
+    <string name="share_attach_text">Check out this app!</string>
 </resources>

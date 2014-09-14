@@ -9,6 +9,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AbsListView;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.michaldabski.panoramio.R;
+import com.michaldabski.panoramio.about.AboutActivity;
 import com.michaldabski.panoramio.models.PanoramioResponse;
 import com.michaldabski.panoramio.models.Photo;
 import com.michaldabski.panoramio.photo_activity.PhotoActivity;
@@ -82,6 +85,14 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             panoramioResponse.setPhotos(this.photos);
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     void addPhotos(Collection<Photo> photoCollection)
@@ -254,5 +265,18 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         {
             requestPhotos(latitude, longitude, photos.size());
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.actionAbout:
+                Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(aboutIntent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

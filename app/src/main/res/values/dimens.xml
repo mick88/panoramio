@@ -1,3 +1,4 @@
 <resources>
     <dimen name="thumb_size">150dp</dimen>
+    <dimen name="about_activity_item_spacing">5dp</dimen>
 </resources>

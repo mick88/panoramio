@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:orderInCategory="10"
+        android:id="@+id/actionAbout"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_info"
+        android:title="@string/about"/>
+</menu>
