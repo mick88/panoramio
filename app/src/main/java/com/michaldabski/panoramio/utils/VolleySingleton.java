@@ -49,7 +49,7 @@ public class VolleySingleton
     public static VolleySingleton getInstance(Context context)
     {
         if (instance == null)
-            instance = new VolleySingleton(context);
+            instance = new VolleySingleton(context.getApplicationContext());
         return instance;
     }
 }
