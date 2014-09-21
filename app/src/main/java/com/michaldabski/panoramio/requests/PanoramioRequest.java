@@ -28,6 +28,8 @@ public class PanoramioRequest extends GsonRequest<PanoramioResponse>
 
     private static String buildUrl(float minx, float miny, float maxx, float maxy, int from, int to)
     {
+        if (Float.isNaN(minx) || Float.isNaN(miny) || Float.isNaN(maxx) || Float.isNaN(maxy))
+            throw new IllegalArgumentException("NaN passed as coordinate");
         return String.format(Locale.ENGLISH, URL_TEMPLATE, from, to, minx, miny, maxx, maxy);
     }
 }
