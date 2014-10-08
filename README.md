@@ -10,3 +10,5 @@ This Panoramio client allows you to browse geotagged photos that have been taken
 ![Screenshot](http://www.michaldabski.com/wp-content/uploads/2014/10/2014-10-06-10.09.14_framed-177x300.png)
 ![Screenshot](http://www.michaldabski.com/wp-content/uploads/2014/10/2014-10-06-10.09.25_framed-177x300.png)
 ![Screenshot](http://www.michaldabski.com/wp-content/uploads/2014/10/2014-10-06-10.09.55_framed-177x300.png)
+
+[More info...](http://www.michaldabski.com/panoramio/)
