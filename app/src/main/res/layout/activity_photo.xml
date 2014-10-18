@@ -31,5 +31,5 @@
         android:layout_weight="0.6"
         android:id="@+id/fragmentMap"
         android:tag="map"
-        android:name="com.google.android.gms.maps.MapFragment"/>
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
 </LinearLayout>

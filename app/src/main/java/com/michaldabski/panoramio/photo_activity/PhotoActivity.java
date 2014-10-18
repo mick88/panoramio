@@ -14,7 +14,7 @@ import android.view.View;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -45,7 +45,7 @@ public class PhotoActivity extends ActionBarActivity implements ViewPager.OnPage
         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
     ViewPager viewPager;
     List<Photo> photos;
-    MapFragment mapFragment;
+    SupportMapFragment mapFragment;
     Map<Marker, Photo> markerPhotoMap;
     private boolean fullscreen = false;
 
@@ -66,7 +66,7 @@ public class PhotoActivity extends ActionBarActivity implements ViewPager.OnPage
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setPageTransformer(true, new PhotoPageTransformer());
-        viewPager.setAdapter(new PhotoPagerAdapter(getFragmentManager(), photos));
+        viewPager.setAdapter(new PhotoPagerAdapter(getSupportFragmentManager(), photos));
         viewPager.setOnPageChangeListener(this);
         // if activity just launched, show photo selected by user
         if (savedInstanceState == null)
@@ -87,7 +87,7 @@ public class PhotoActivity extends ActionBarActivity implements ViewPager.OnPage
 
         if (MiscUtils.isGooglePlayAvailable(this))
         {
-            mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMap);
+            mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentMap);
             if (mapFragment.getMap() != null)
                 setupMap(mapFragment.getMap());
         }
