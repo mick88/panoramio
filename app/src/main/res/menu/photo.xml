@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/actionDetails"
         android:orderInCategory="2"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_info"
         android:title="@string/details"/>
 
@@ -12,7 +13,7 @@
         android:id="@+id/actionSharePhotoUrl"
         android:title="@string/share_photo"
         android:orderInCategory="3"
-        android:showAsAction="ifRoom"
-        android:actionProviderClass="android.widget.ShareActionProvider"
+        app:showAsAction="ifRoom"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         />
 </menu>

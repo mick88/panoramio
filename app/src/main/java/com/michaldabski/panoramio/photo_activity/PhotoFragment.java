@@ -4,13 +4,14 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ShareActionProvider;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.michaldabski.panoramio.R;
@@ -41,7 +42,7 @@ public class PhotoFragment extends Fragment implements View.OnClickListener
         inflater.inflate(R.menu.photo, menu);
 
         MenuItem item = menu.findItem(R.id.actionSharePhotoUrl);
-        ShareActionProvider actionProvider = (ShareActionProvider) item.getActionProvider();
+        ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setData(Uri.parse(photo.getUrl()));
         shareIntent.setType("text/*");

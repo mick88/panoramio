@@ -1,12 +1,12 @@
 <resources>
 
-    <style name="BaseTheme" parent="android:Theme.Holo" />
-    <style name="BaseActionbarTheme" parent="android:Widget.Holo.ActionBar.Solid" />
-    <style name="BaseDialogTheme" parent="android:Theme.Holo.Dialog" />
+    <style name="BaseTheme" parent="Base.Theme.AppCompat" />
+    <style name="BaseActionbarTheme" parent="Widget.AppCompat.ActionBar.Solid" />
+    <style name="BaseDialogTheme" parent="Theme.AppCompat.Dialog" />
 
     <style name="AppTheme" parent="BaseTheme">
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:actionBarStyle">@style/actionbar</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="actionBarStyle">@style/actionbar</item>
     </style>
 
     <style name="AboutTheme" parent="AppTheme" />

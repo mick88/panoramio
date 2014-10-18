@@ -1,7 +1,5 @@
 package com.michaldabski.panoramio.main_activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Criteria;
@@ -9,6 +7,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-public class MainActivity extends Activity implements Response.ErrorListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener
+public class MainActivity extends ActionBarActivity implements Response.ErrorListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener
 {
     private static final String
             STATE_RESPONSE = "response",
@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             distance = savedInstanceState.getFloat(STATE_DISTANCE);
             address = savedInstanceState.getString(STATE_ADDRESS);
 
-            ActionBar actionBar = getActionBar();
+            ActionBar actionBar = getSupportActionBar();
             if (actionBar != null)
                 actionBar.setSubtitle(address);
         }
@@ -151,7 +151,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
                         if (address != null && isFinishing() == false)
                         {
                             MainActivity.this.address = address;
-                            ActionBar actionBar = getActionBar();
+                            ActionBar actionBar = getSupportActionBar();
                             if (actionBar != null)
                                 actionBar.setSubtitle(address);
                         }

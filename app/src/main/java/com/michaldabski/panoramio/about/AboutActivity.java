@@ -1,10 +1,11 @@
 package com.michaldabski.panoramio.about;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +19,7 @@ import com.michaldabski.panoramio.R;
 /**
  * Created by Michal on 14-Sep-14.
  */
-public class AboutActivity extends Activity implements AdapterView.OnItemClickListener
+public class AboutActivity extends ActionBarActivity implements AdapterView.OnItemClickListener
 {
     private static final String PLAYSTORE_URL = "https://play.google.com/store/apps/developer?id=mick88";
     private static final String GOOGLE_PLUS_URL = "https://plus.google.com/u/0/+MichalDabski";
@@ -71,7 +72,7 @@ public class AboutActivity extends Activity implements AdapterView.OnItemClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        setupActionbar(getActionBar());
+        setupActionbar(getSupportActionBar());
         setupList((ListView) findViewById(android.R.id.list));
     }
 

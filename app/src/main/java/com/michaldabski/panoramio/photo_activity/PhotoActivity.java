@@ -1,12 +1,12 @@
 package com.michaldabski.panoramio.photo_activity;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PhotoActivity extends Activity implements ViewPager.OnPageChangeListener, GoogleMap.OnMarkerClickListener, View.OnSystemUiVisibilityChangeListener
+public class PhotoActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener, GoogleMap.OnMarkerClickListener, View.OnSystemUiVisibilityChangeListener
 {
     public static final String
             ARG_PHOTOS_ARRAY = "photos",
@@ -54,7 +54,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
-        setupActionbar(getActionBar());
+        setupActionbar(getSupportActionBar());
 
         Bundle extras = getIntent().getExtras();
         Parcelable[] parcelableArray = extras.getParcelableArray(ARG_PHOTOS_ARRAY);
@@ -83,7 +83,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
                 enableFullscreen();
         }
 
-        setPhotoTitleAndAuthor(getActionBar(), photos.get(viewPager.getCurrentItem()));
+        setPhotoTitleAndAuthor(getSupportActionBar(), photos.get(viewPager.getCurrentItem()));
 
         if (MiscUtils.isGooglePlayAvailable(this))
         {
@@ -196,7 +196,7 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     public void onPageSelected(int position)
     {
         showPhotoLocation(photos.get(position), true);
-        setPhotoTitleAndAuthor(getActionBar(), photos.get(position));
+        setPhotoTitleAndAuthor(getSupportActionBar(), photos.get(position));
     }
 
     void setPhotoTitleAndAuthor(ActionBar actionBar, Photo photo)
