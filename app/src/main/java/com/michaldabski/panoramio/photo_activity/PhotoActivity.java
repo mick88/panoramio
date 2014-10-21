@@ -1,9 +1,8 @@
 package com.michaldabski.panoramio.photo_activity;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
@@ -37,6 +36,13 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
         STATE_FULLSCREEN = "fullscreen",
         STATE_MAP_VISIBILITY = "map_visibility";
     private static final float MAP_ZOOM_LEVEL = 15f;
+    @SuppressLint("InlinedApi")
+    private static final int FULLSCREEN_UI_VISIBILITY_FLAGS = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        | View.SYSTEM_UI_FLAG_FULLSCREEN
+        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
     ViewPager viewPager;
     List<Photo> photos;
     MapFragment mapFragment;
@@ -224,23 +230,14 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
     {
         fullscreen = false;
 
-        findViewById(R.id.viewPager).setSystemUiVisibility(
-                0
-        );
+        viewPager.setSystemUiVisibility(viewPager.getSystemUiVisibility() & ~FULLSCREEN_UI_VISIBILITY_FLAGS);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     public void enableFullscreen()
     {
         fullscreen = true;
-        View view = findViewById(R.id.viewPager);
-        view.setOnSystemUiVisibilityChangeListener(this);
-        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        viewPager.setOnSystemUiVisibilityChangeListener(this);
+        viewPager.setSystemUiVisibility(FULLSCREEN_UI_VISIBILITY_FLAGS);
         findViewById(R.id.tvCopyright).setVisibility(View.GONE);
     }
 
