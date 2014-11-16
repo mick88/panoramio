@@ -42,7 +42,7 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             STATE_ADDRESS = "address",
             STATE_LAT = "latitude",
             STATE_LONG = "longitude";
-    private float distance = 0.1f;
+    private float distance = 0.03f;
     private String address;
     private ArrayList<Photo> photos = new ArrayList<Photo>();
 
