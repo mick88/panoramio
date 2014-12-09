@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -27,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PhotoActivity extends Activity implements ViewPager.OnPageChangeListener, GoogleMap.OnMarkerClickListener, View.OnSystemUiVisibilityChangeListener
+public class PhotoActivity extends Activity implements ViewPager.OnPageChangeListener, GoogleMap.OnMarkerClickListener, View.OnSystemUiVisibilityChangeListener, OnMapReadyCallback
 {
     public static final String
             ARG_PHOTOS_ARRAY = "photos",
@@ -88,8 +89,8 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
         if (MiscUtils.isGooglePlayAvailable(this))
         {
             mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMap);
-            if (mapFragment.getMap() != null)
-                setupMap(mapFragment.getMap());
+            mapFragment.getMapAsync(this);
+
         }
     }
 
@@ -163,7 +164,8 @@ public class PhotoActivity extends Activity implements ViewPager.OnPageChangeLis
 
     }
 
-    void setupMap(GoogleMap googleMap)
+    @Override
+    public void onMapReady(GoogleMap googleMap)
     {
         googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         googleMap.getUiSettings().setZoomControlsEnabled(false);
