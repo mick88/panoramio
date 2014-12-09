@@ -74,7 +74,6 @@ public class PhotoFragment extends Fragment implements View.OnClickListener
     {
         super.onViewCreated(view, savedInstanceState);
 
-        PhotoActivity activity = (PhotoActivity) getActivity();
         NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.imgImage);
         imageView.setImageUrl(photo.getUrl(), VolleySingleton.getInstance(getActivity()).getImageLoader());
         imageView.setOnClickListener(this);
