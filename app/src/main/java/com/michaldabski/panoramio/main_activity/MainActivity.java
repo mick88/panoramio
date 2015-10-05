@@ -1,13 +1,16 @@
 package com.michaldabski.panoramio.main_activity;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,14 +45,15 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
             STATE_ADDRESS = "address",
             STATE_LAT = "latitude",
             STATE_LONG = "longitude";
+    public static final int REQUEST_CODE_PERMISSION_GPS = 1;
     private float distance = 0.03f;
     private String address;
     private ArrayList<Photo> photos = new ArrayList<Photo>();
 
     PanoramioResponse panoramioResponse;
     PanoramioRequest panoramioRequest = null;
-    float latitude=Float.NaN,
-            longitude=Float.NaN;
+    float latitude = Float.NaN,
+            longitude = Float.NaN;
 
 
     @Override
@@ -77,13 +81,42 @@ public class MainActivity extends Activity implements Response.ErrorListener, Ad
         gridView.setOnScrollListener(this);
 
         if (panoramioResponse == null)
-            acquireLocation();
+            acquireLocationWrapper();
         else
         {
             addPhotos(panoramioResponse.getPhotos());
             panoramioResponse.setPhotos(this.photos);
         }
 
+    }
+
+    void acquireLocationWrapper()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                requestPermissions(new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                }, REQUEST_CODE_PERMISSION_GPS);
+            } else
+            {
+                acquireLocation();
+            }
+        } else
+        {
+            acquireLocation();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // call to acquire location - if permission was granted, it'll proceed normally
+        // otherwise it will fallback to random coordinates
+        acquireLocation();
     }
 
     @Override
